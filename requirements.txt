@@ -3,6 +3,6 @@ streamlit
 requests
 pandas
 numpy
-base64
 googlemaps
 folium
+streamlit-folium
