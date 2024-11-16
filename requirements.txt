@@ -1,11 +1,8 @@
 openai
 streamlit
 requests
-os
 pandas
 numpy
-basic64
+base64
 googlemaps
-list
 folium
-datetime
