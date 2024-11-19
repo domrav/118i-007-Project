@@ -102,8 +102,7 @@ try:
     # Ensure consistent column naming
     df.columns = df.columns.str.strip().str.lower()
     
-    st.subheader("Data Preview")
-    st.dataframe(df.head(), height=200)
+    
 except Exception as e:
     st.error(f"Error loading CSV file: {e}")
     st.stop()
@@ -122,8 +121,7 @@ with st.sidebar:
         cities = sorted(df[city_column].dropna().unique())
         selected_cities = st.multiselect("Select Cities", cities)
     
-    st.markdown("<h3 style='color: black;'>Data Preview:</h3>", unsafe_allow_html=True)
-    st.dataframe(df.head(), height=200)
+
 
 # Filter dataframe
 filtered_df = df[df[city_column].isin(selected_cities)] if selected_cities else df
