@@ -1,17 +1,15 @@
-
-import os
-import openai
-import base64
-from typing import List, Optional
 import streamlit as st
 import requests
+import os
 import pandas as pd
 import numpy as np
 from datetime import datetime
 import folium
 from streamlit_folium import st_folium
 import googlemaps
-
+import openai
+import base64
+from typing import List, Optional
 
 # Initialize OpenAI client
 openai.api_key = os.environ["OPENAI_API_KEY"]
@@ -164,7 +162,7 @@ def analyze_image(uploaded_file) -> str:
     try:
         base64_image = encode_uploaded_image(uploaded_file)
         response = openai.ChatCompletion.create(
-            model="gpt-4-vision-preview",
+            model="gpt-4o-mini",
             messages=[{
                 "role": "user",
                 "content": [
@@ -201,7 +199,7 @@ def get_image(prompt: str, category: str, model: str = "dall-e-3") -> Optional[L
     full_prompt = f"{base_prompt} {prompt} in its natural creek trail habitat, photorealistic style"
     
     try:
-        images = openai.Image.create(
+        images = client.images.generate(
             prompt=full_prompt,
             model=model,
             n=1,
