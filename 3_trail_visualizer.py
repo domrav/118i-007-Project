@@ -199,21 +199,22 @@ def get_image(prompt: str, category: str, model: str = "dall-e-3") -> Optional[L
     full_prompt = f"{base_prompt} {prompt} in its natural creek trail habitat, photorealistic style"
     
     try:
-        images = client.images.generate(
+        # Corrected method for generating an image
+        images = openai.Image.create(
             prompt=full_prompt,
-            model=model,
             n=1,
             size="1024x1024"
         )
         filenames = []
-        for i, image_data in enumerate(images.data):
+        for i, image_data in enumerate(images['data']):
             filename = f"{filename_from_input(prompt)}_{i + 1}.png"
-            download_image(filename, image_data.url)
+            download_image(filename, image_data['url'])
             filenames.append(filename)
         return filenames
     except Exception as e:
         st.error(f"Error generating image: {e}")
         return None
+
 
 def main():
     # Main header with enhanced nature theme
